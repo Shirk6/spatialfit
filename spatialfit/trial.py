@@ -20,7 +20,7 @@ def setup(config, seed, stage_sigma=0.002, nest_err=0.0, stage_yaw_deg=1.0, ba_p
     rng = np.random.default_rng(seed)
     parts = geometry.generate(params.load(ROOT / f'configs/{config}.yaml'))
     staging = None
-    if ba_push is not None:               # backrest rack distance override (scene.BA_PUSH by default)
+    if ba_push is not None:               # backrest rack distance override (default scene.BA_PUSH)
         staging = dict(scene.STAGING); staging['BA'] = ('orbit', np.radians(180), ba_push)
     wc = scene.Workcell(parts, staging=staging)
     wc.reset()

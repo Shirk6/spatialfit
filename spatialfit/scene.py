@@ -33,13 +33,13 @@ def rot_of(q_wxyz):
 
 
 RACK_H = 0.03                        # base plate of the floor racks for the two panels
-BA_PUSH = 0.15                       # radial push of the backrest rack (m); 0 = the original layout
+BA_PUSH = 0.15                       # radial push of the backrest rack away from the robot base (m)
 STAGING = {                          # (x, y, yaw[, beta]): pose = Rz(yaw) * Ry(beta); beta != 0 -> part stands in a rack
     "LF": (-0.38, 0.38, 0.0), "RF": (-0.50, 0.38, 0.0), "LR": (-0.38, 0.52, 0.0), "RR": (-0.50, 0.52, 0.0),
     "FR": (-0.36, 0.0, np.pi / 2), "BR": (-0.44, 0.0, np.pi / 2), "SL": (-0.52, 0.0, 0.0), "SR": (-0.60, 0.0, 0.0),
     "SE": ("orbit", np.radians(-90)),            # installed pose swung about the robot base
-    # backrest: swung 180 deg and pushed 0.15 m further out. At the bare swing (0.35 m from the base) chair B's tall,
-    # 20-deg backrest left the forearm only a few mm of clearance: batch trials lost ~1/3 of B builds at this pick.
+    # backrest: swung 180 deg about the base and pushed BA_PUSH further out, so the forearm has room to reach over
+    # a tall, reclined backrest (chair B)
     "BA": ("orbit", np.radians(180), BA_PUSH),
 }
 

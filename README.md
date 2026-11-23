@@ -53,7 +53,7 @@ python scripts/run_build.py --config A --seed 0 --bias SL:5,0,0   # 给 SL 的�
 MUJOCO_GL=glfw python scripts/preview.py build/A_seed0.npz A build/preview_A.mp4 wide 3   # 快速预览视频
 ```
 
-把 `A` 换成 `B` 就是第二把椅子。`run_build.py` 的其他参数：`--stage_sigma`（摆放位置误差，m）、`--nest_err`（腿座位置误差，mm）、`--no_perception` / `--no_force`（消融）、`--ba_push 0`（靠背支架旧布局）。
+把 `A` 换成 `B` 就是第二把椅子。`run_build.py` 的其他参数：`--stage_sigma`（摆放位置误差，m）、`--nest_err`（腿座位置误差，mm）、`--no_perception` / `--no_force`（消融）、`--ba_push`（靠背支架往外推的距离，m，默认 0.15）。
 
 | 模块 | 文件 | 内容 |
 |---|---|---|
@@ -91,12 +91,6 @@ python experiments/run_trials.py --plan "CL:A,B;NOF:A;NOP:A;OL:A" --seeds 0-49 \
   --nest_err 2.0 --stage_sigma 4.0 --stage_yaw 2.0 --out experiments/results/E4
 ```
 
-**靠背支架旧布局对照**（可选，`--ba_push 0`）：
-
-```bash
-python experiments/run_trials.py --plan "CL:A,B" --seeds 0-19 --ba_push 0 --out experiments/results/E2_rack0
-```
-
 单次试验约 1 分钟（墙钟时间记在每个 `*_summary.json` 的 `wall_time` 里）。要并行，开 N 个进程分别跑 `--shard k/N`（k = 0…N−1，输出目录相同），每个进程占一份 cuRobo 显存：
 
 ```bash
@@ -104,7 +98,7 @@ for k in 0 1 2 3; do python experiments/run_trials.py --plan "CL:A,B;NOF:A;NOP:A
   --out experiments/results/E23 --shard $k/4 > experiments/results/E23_w$k.log 2>&1 & done; wait
 ```
 
-**汇总和作图**（E23 必需，E4、E2_rack0 存在时一起处理）：
+**汇总和作图**（E23 必需，E4 存在时一起处理）：
 
 ```bash
 python experiments/analyze.py --fig experiments/results/figs

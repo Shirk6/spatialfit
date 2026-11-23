@@ -12,7 +12,7 @@ ap.add_argument('--stage_sigma', type=float, default=0.002); ap.add_argument('--
 ap.add_argument('--nest_err', type=float, default=0.0, help='leg nest position error U(-e, e) mm in x and y')
 ap.add_argument('--no_perception', action='store_true', help='ablation: act on nominal poses only')
 ap.add_argument('--no_force', action='store_true', help='ablation: position-only insertion, no jam retry')
-ap.add_argument('--ba_push', type=float, default=None, help='backrest rack push (m); 0 = original layout')
+ap.add_argument('--ba_push', type=float, default=None, help='backrest rack push away from the base (m); default scene.BA_PUSH')
 a = ap.parse_args()
 bias = {}
 if a.bias:

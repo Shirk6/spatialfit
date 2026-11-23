@@ -404,13 +404,6 @@ def e4_stress(summ23, summ4, fig_dir):
                     'complete chairs (95 % Wilson interval)')
 
 
-def rack_fix(summ_old, summ_new, fig_dir):
-    rows = [(f'Chair {cfg}', ('CL', cfg)) for cfg in ('A', 'B') if ('CL', cfg) in summ_old and ('CL', cfg) in summ_new]
-    if rows:
-        paired_bars(rows, [('backrest rack 0.35 m (before)', BLUE, summ_old), ('0.50 m (after)', TEAL, summ_new)], fig_dir,
-                    'rack_fix.png', 'complete chairs, closed loop (95 % Wilson interval)', figsize=(6.3, 2.9))
-
-
 RAIL_HOSTS = dict(FR=('LF', 'RF', 0), BR=('LR', 'RR', 0), SL=('LF', 'LR', 1), SR=('RF', 'RR', 1))
 
 
@@ -524,12 +517,8 @@ if __name__ == '__main__':
     trials4 = load_e23(res, 'E4') if (res / 'E4').exists() else []
     summ4 = e23_tables(trials4, out, 'e4') if trials4 else []
     e4_stress(key(summ), key(summ4), fig_dir)
-    trials0 = load_e23(res, 'E2_rack0') if (res / 'E2_rack0').exists() else []
-    summ0 = e23_tables(trials0, out, 'e2_rack0') if trials0 else []
-    rack_fix(key(summ0), key(summ), fig_dir)
     e3_heat([('NOMINAL PERTURBATION', trials), ('2× PERTURBATION (E4)', trials4)], fig_dir)
     print('E4', [(s['cond'], s['config'], s['success'], s['n']) for s in summ4])
-    print('rack0', [(s['cond'], s['config'], s['success'], s['n'], s['causes']) for s in summ0])
     print('rail spacing', rail_spacing(trials + trials4, table, fig_dir, out))
     e2_grid(trials, fig_dir)
     e3_success(summ, fig_dir)

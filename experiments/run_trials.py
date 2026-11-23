@@ -43,7 +43,7 @@ if __name__ == '__main__':
     ap.add_argument('--nest_err', type=float, default=1.0, help='mm')
     ap.add_argument('--stage_sigma', type=float, default=2.0, help='mm')
     ap.add_argument('--stage_yaw', type=float, default=1.0, help='deg (sigma of the staging yaw error)')
-    ap.add_argument('--ba_push', type=float, default=None, help='backrest rack push (m); default scene.BA_PUSH, 0 = old layout')
+    ap.add_argument('--ba_push', type=float, default=None, help='backrest rack push away from the base (m); default scene.BA_PUSH')
     ap.add_argument('--out', default='experiments/results/E23')
     ap.add_argument('--timeout', type=int, default=900, help='wall-clock seconds per trial')
     ap.add_argument('--shard', default='0/1', help='k/N: run only jobs i with i %% N == k (parallel workers)')
