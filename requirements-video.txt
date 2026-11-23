@@ -1,0 +1,10 @@
+# Video compositing env (conda env `mjsim`, Python 3.11), used only by render/compose_final.py and
+# scripts/video_split_frames.py. Kept separate because opencv 5 needs numpy >= 2, cuRobo needs numpy < 2.
+#   python -m pip install -r requirements-video.txt
+mujoco==3.17.0
+numpy==2.4.6
+scipy==1.17.1
+imageio==2.38.1
+imageio-ffmpeg==0.8.1
+pillow==13.0.0
+opencv-python-headless==5.0.0.93

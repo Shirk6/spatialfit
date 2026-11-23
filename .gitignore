@@ -1,0 +1,16 @@
+# generated outputs (logs, renders, videos, experiment results) -- reproduce with the commands in README.md
+build/
+experiments/results/
+experiments/*.log
+MUJOCO_LOG.TXT
+*.npz
+*.mp4
+
+# third-party code, fetched by scripts/setup_third_party.sh
+third_party/
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
